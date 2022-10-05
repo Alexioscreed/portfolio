@@ -22,128 +22,14 @@ span{
 
 
 @media (max-width: 500px){
-    #menu-icon{
-       display: block;
-       display: inline-flex;
-       align-items: center;
-       justify-content: center;
-       height: 35px;
-       width: 35px;
-       background: rgb(21, 15, 78);
-       color: #fff; 
-       font-size: 25px;
-       border-radius: 10px;
+   p {
+        font-family: serif;
+        font-size: 20px;
+        line-height: 1.4;
     }
-    .navlist{
-       position: absolute;
-       top: -600px;
-       left: 0;
-       right: 0;
-       display: flex;
-       flex-direction: column;
-       background: rgb(113, 202, 238);
-       text-align: left;
-       transition: all .43s ease;
+    h1{
+        font-size: 90px;
+        color: rgb(21, 15, 78);
     }
-    .navlist a{
-       font-size: 15px;
-       display: block;
-       padding: 0.5rem;
-       margin: 1.1rem;
-       border-bottom: none;
-       border-left: 2px solid rgb(21, 15, 78);
-    }
-    .navlist a:hover{
-       border-bottom: none;
-       background: rgb(21, 15, 78, 0.3);
-    }
-    .navlist.open{
-       top: 100%;
-    }
- }
- @keyframes change{
-    0%{
-     background-position: 0 50%;
-    }
-    50%{
-     background-position: 50% 100%;
-    }
-    100%{
-     background-position: 0 50%;
-    }
- }
-
- 
-@media (max-width: 1470px){
-    header{
-       padding: 15px 2%;
-       transition: 0.2s;
-    }
-    section{
-       padding: 0 2%;
-       transition: 0.2s;
-    }
- }
- @media (max-width: 1000px){
-    .main-text h1{
-       font-size: 3.9rem;
-       transition: 0.2s;
-    }
-    .main-text h5{
-       font-size: 22px;
-    }
-    .main-text h3{
-       font-size: 2rem;
-    }
- }
- @media (max-width: 975px){
-    #menu-icon{
-       display: block;
-       display: inline-flex;
-       align-items: center;
-       justify-content: center;
-       height: 35px;
-       width: 35px;
-       background: rgb(21, 15, 78);
-       color: #fff; 
-       font-size: 25px;
-       border-radius: 10px;
-    }
-    .navlist{
-       position: absolute;
-       top: -600px;
-       left: 0;
-       right: 0;
-       display: flex;
-       flex-direction: column;
-       background: rgb(113, 202, 238);
-       text-align: left;
-       transition: all .43s ease;
-    }
-    .navlist a{
-       font-size: 15px;
-       display: block;
-       padding: 0.5rem;
-       margin: 1.1rem;
-       border-bottom: none;
-       border-left: 2px solid rgb(21, 15, 78);
-    }
-    .navlist a:hover{
-       border-bottom: none;
-       background: rgb(21, 15, 78, 0.3);
-    }
-    .navlist.open{
-       top: 100%;
-    }
- }
- @keyframes change{
-    0%{
-     background-position: 0 50%;
-    }
-    50%{
-     background-position: 50% 100%;
-    }
-    100%{
-     background-position: 0 50%;
-    }
+    
  }
