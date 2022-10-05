@@ -24,11 +24,11 @@ span{
 @media (max-width: 500px){
    p {
         font-family: serif;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 1.4;
     }
     h1{
-        font-size: 85px;
+        font-size: 80px;
         color: rgb(21, 15, 78);
     }
     
