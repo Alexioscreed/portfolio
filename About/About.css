@@ -20,3 +20,16 @@ span{
     color: rgb(11, 0, 107);
 }
 
+@media (max-width: 500px){
+    p {
+         font-family: serif;
+         font-size: 18px;
+         line-height: 1.4;
+     }
+     h1{
+         font-size: 80px;
+         color: rgb(21, 15, 78);
+     }
+     
+  }
+
