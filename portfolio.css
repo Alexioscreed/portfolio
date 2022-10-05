@@ -168,3 +168,56 @@ section{
     background-position: 0 50%;
    }
 }
+
+
+@media (max-width: 500px){
+   #menu-icon{
+      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 35px;
+      width: 35px;
+      background: rgb(21, 15, 78);
+      color: #fff; 
+      font-size: 25px;
+      border-radius: 10px;
+   }
+   .navlist{
+      position: absolute;
+      top: -600px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      background: rgb(113, 202, 238);
+      text-align: left;
+      transition: all .43s ease;
+   }
+   .navlist a{
+      font-size: 15px;
+      display: block;
+      padding: 0.5rem;
+      margin: 1.1rem;
+      border-bottom: none;
+      border-left: 2px solid rgb(21, 15, 78);
+   }
+   .navlist a:hover{
+      border-bottom: none;
+      background: rgb(21, 15, 78, 0.3);
+   }
+   .navlist.open{
+      top: 100%;
+   }
+}
+@keyframes change{
+   0%{
+    background-position: 0 50%;
+   }
+   50%{
+    background-position: 50% 100%;
+   }
+   100%{
+    background-position: 0 50%;
+   }
+}
