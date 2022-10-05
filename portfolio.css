@@ -111,10 +111,10 @@ section{
       transition: 0.2s;
    }
    .main-text h5{
-      font-size: 18px;
+      font-size: 22px;
    }
    .main-text h3{
-      font-size: 1rem;
+      font-size: 2rem;
    }
 }
 @media (max-width: 975px){
