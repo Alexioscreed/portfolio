@@ -1576,6 +1576,13 @@ a:not(.btn):not(.nav-link):not(.social-link):hover::after {
     gap: var(--spacing-12);
   }
 
+  .about-text p {
+    line-height: 1.8;
+    word-spacing: 0.1em;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--spacing-5);
+  }
+
   .about-stats {
     grid-template-columns: repeat(3, 1fr);
     flex-direction: row;
@@ -1597,11 +1604,33 @@ a:not(.btn):not(.nav-link):not(.social-link):hover::after {
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 var(--spacing-3);
+    padding: 0 var(--spacing-4);
   }
 
   .hero-title {
     font-size: 2rem;
+  }
+
+  .about-text p {
+    line-height: 1.9;
+    word-spacing: 0.15em;
+    letter-spacing: 0.03em;
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-5);
+  }
+
+  .about-info {
+    margin-top: var(--spacing-6);
+  }
+
+  .info-item {
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .info-label {
+    min-width: auto;
+    font-size: var(--font-size-sm);
   }
 
   .about-stats {
