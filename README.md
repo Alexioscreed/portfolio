@@ -135,7 +135,7 @@ portfolio/
 
 For questions, suggestions, or collaborations:
 
-- **Email**: lhusajo@hopertz.me
+- **Email**: lhusajo.ngulwa@gmail.com
 - **Phone**: +255 625 387 142
 - **Location**: Tanzania
 
