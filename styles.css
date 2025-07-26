@@ -277,6 +277,7 @@ button {
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  position: relative;
 }
 
 .nav-logo {
@@ -352,6 +353,13 @@ button {
   flex-direction: column;
   cursor: pointer;
   gap: 4px;
+  padding: var(--spacing-2);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-toggle:hover {
+  background: var(--light-bg);
 }
 
 .bar {
@@ -360,18 +368,20 @@ button {
   background: var(--text-color);
   transition: var(--transition);
   border-radius: 2px;
+  transform-origin: center;
 }
 
 .nav-toggle.active .bar:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .nav-toggle.active .bar:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
 .nav-toggle.active .bar:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ===== HERO SECTION ===== */
@@ -1529,23 +1539,54 @@ a:not(.btn):not(.nav-link):not(.social-link):hover::after {
   }
 
   .nav-menu {
-    position: fixed;
-    top: 70px;
-    left: -100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: auto;
     background: var(--white);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: var(--spacing-8);
+    gap: var(--spacing-4);
+    padding: var(--spacing-6) 0;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
     transition: var(--transition);
-    box-shadow: var(--shadow);
-    z-index: 999; /* Ensure mobile menu stays below navbar but above content */
+    box-shadow: var(--shadow-lg);
+    border-radius: 0 0 20px 20px;
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    z-index: 999;
   }
 
   .nav-menu.active {
-    left: 0;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu .nav-link {
+    padding: var(--spacing-3) var(--spacing-6);
+    border-radius: 12px;
+    width: 80%;
+    text-align: center;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .nav-menu .nav-link:hover {
+    background: var(--light-bg);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+
+  .nav-menu .nav-link.active {
+    background: var(--primary-color);
+    color: var(--white);
   }
 
   .nav-toggle {
