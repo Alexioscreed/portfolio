@@ -1407,10 +1407,7 @@ button {
 }
 
 .footer-content p:first-child {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
   font-weight: 600;
   letter-spacing: 0.5px;
 }
