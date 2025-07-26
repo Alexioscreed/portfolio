@@ -1093,7 +1093,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
+  color: var(--text-light);
   font-size: 1.25rem;
   text-decoration: none;
   transition: var(--morph-transition);
@@ -1202,7 +1202,7 @@ button {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: var(--text-secondary);
+  color: var(--text-light);
   transition: var(--morph-transition);
 }
 
@@ -1316,14 +1316,51 @@ button {
   border-color: var(--border-color);
 }
 
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--primary-color);
+  color: var(--text-color);
+  box-shadow: 
+    0 8px 25px rgba(96, 165, 250, 0.3),
+    0 0 0 3px rgba(96, 165, 250, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .form-group input:focus::placeholder,
+[data-theme="dark"] .form-group textarea:focus::placeholder {
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+
 [data-theme="dark"] .project-card {
   background: var(--light-bg);
   border-color: var(--border-color);
 }
 
-[data-theme="dark"] .form-group input:focus,
-[data-theme="dark"] .form-group textarea:focus {
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+[data-theme="dark"] .btn-primary {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
 }
 
 /* ===== FOOTER ===== */
