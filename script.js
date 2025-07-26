@@ -154,7 +154,7 @@ class Portfolio {
                     errorMessage = 'Name must be at least 2 characters long';
                 }
                 break;
-            case 'email':
+            case 'from_email':
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(value)) {
                     isValid = false;
@@ -246,26 +246,23 @@ class Portfolio {
     async sendFormSubmission(form) {
         const formData = new FormData(form);
         
-        // Try Netlify Forms first (if hosted on Netlify)
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            try {
-                const response = await fetch('/', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: new URLSearchParams(formData).toString()
-                });
-                
-                if (response.ok) {
-                    return response;
-                }
-            } catch (error) {
-                console.log('Netlify form submission failed, using fallback');
+        // Try Web3Forms first
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                return response;
             }
+        } catch (error) {
+            console.log('Web3Forms submission failed, using fallback');
         }
         
-        // Fallback to mailto
+        // Fallback to mailto if Web3Forms fails
         const name = formData.get('name');
-        const email = formData.get('email');
+        const email = formData.get('from_email');
         const subject = formData.get('subject');
         const message = formData.get('message');
         

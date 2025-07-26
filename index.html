@@ -366,13 +366,17 @@
                         </a>
                     </div>
                 </div>
-                <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" action="/success.html">
-                    <input type="hidden" name="form-name" value="contact">
+                <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="56d3911b-cdd0-4810-96b6-416107e53e56">
+                    <!-- Your email (where form submissions will be sent) -->
+                    <input type="hidden" name="email" value="lhusajo.ngulwa@gmail.com">
+                    <!-- Form fields -->
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <input type="email" id="email" name="from_email" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
                         <input type="text" id="subject" name="subject" placeholder="Subject" required>
@@ -380,6 +384,8 @@
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                     </div>
+                    <!-- Redirect after submission -->
+                    <input type="hidden" name="redirect" value="https://alexios-creed.vercel.app/#contact">
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
