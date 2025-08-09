@@ -10,17 +10,7 @@ class Portfolio {
         this.themeToggle = document.getElementById('theme-toggle');
         this.themeIcon = document.getElementById('theme-icon');
         
-        // Initialize EmailJS
-        this.initEmailJS();
-        
         this.init();
-    }
-
-    initEmailJS() {
-        // Initialize EmailJS with your public key
-        if (typeof emailjs !== 'undefined') {
-            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this
-        }
     }
 
     init() {

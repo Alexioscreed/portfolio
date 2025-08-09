@@ -1,0 +1,21 @@
+{
+    "name": "Lhusajo Ngulwa - Portfolio",
+    "short_name": "Alexios Creed",
+    "description": "Full-Stack Mobile & Web Developer Portfolio",
+    "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "apple-touch-icon.svg",
+            "sizes": "180x180",
+            "type": "image/svg+xml"
+        }
+    ],
+    "theme_color": "#1e40af",
+    "background_color": "#f8fafc",
+    "display": "standalone",
+    "start_url": "/"
+}
