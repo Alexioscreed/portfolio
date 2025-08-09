@@ -1,27 +1,114 @@
-name: scp files
-on: [push]
+name: deploy via ssh
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
- 
   build:
-    name: Build
+    name: Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@master
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        source: "*"
-        target: "/var/www/lhusajo"
-    - name: Restart nginx
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-            echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show changed files (for context)
+        run: |
+          echo "Recent changes:"
+          git --no-pager diff --name-only HEAD^ || true
+
+      - name: Quick connectivity check to SSH host
+        env:
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+          echo "Testing TCP connectivity to $HOST:$PORT ..."
+          # Try up to 5 times in case the host is briefly unavailable
+          for i in 1 2 3 4 5; do
+            if timeout 5 bash -c "</dev/tcp/$HOST/$PORT" 2>/dev/null; then
+              echo "Host is reachable."
+              exit 0
+            fi
+            echo "Attempt $i failed; retrying in 3s..."
+            sleep 3
+          done
+          echo "Unable to reach $HOST:$PORT. Check server, DNS, port or firewall." >&2
+          exit 1
+
+      - name: Copy files via SSH (key auth)
+        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          source: .
+          target: /var/www/lhusajo
+          rm: true
+          strip_components: 0
+          tar_tmp_path: /tmp
+          overwrite: true
+          debug: true
+          timeout: 120s
+          exclude: |
+            .git*
+            .github/*
+            .vscode/*
+            **/node_modules/**
+            **/.DS_Store
+
+      - name: Copy files via SSH (password auth)
+        if: ${{ secrets.SSH_PRIVATE_KEY == '' }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: .
+          target: /var/www/lhusajo
+          rm: true
+          strip_components: 0
+          tar_tmp_path: /tmp
+          overwrite: true
+          debug: true
+          timeout: 120s
+          exclude: |
+            .git*
+            .github/*
+            .vscode/*
+            **/node_modules/**
+            **/.DS_Store
+
+      - name: Restart nginx (key auth)
+        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          timeout: 60s
+          script: |
+            sudo -n systemctl reload nginx || echo "nginx reload returned non-zero; attempting restart" && sudo -n systemctl restart nginx
+
+      - name: Restart nginx (password auth)
+        if: ${{ secrets.SSH_PRIVATE_KEY == '' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          timeout: 60s
+          script: |
+            echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx || echo "nginx reload returned non-zero; attempting restart" && echo ${{ secrets.PASSWORD }} | sudo -S systemctl restart nginx
